@@ -27,7 +27,7 @@ namespace MinecraftAFKFish {
             mouse(MouseEventFlags.RightDown);
             Thread.Sleep(100);
             mouse(MouseEventFlags.RightUp);
-            Thread.Sleep(100);
+            Thread.Sleep(200);
             mouse(MouseEventFlags.RightDown);
             Thread.Sleep(100);
             mouse(MouseEventFlags.RightUp);
@@ -64,15 +64,22 @@ namespace MinecraftAFKFish {
                 Console.WriteLine(" Started!");
                 var gotPoint = GetCursorPos(out currentMousePoint);
                 float currentVolume = 0;
+                DateTime lastMancing = DateTime.Now;
                 while (many != 0) {
                     currentVolume = audioMeterInfo.MasterPeakValue;
-                    //Console.WriteLine(String.Format("{0:0.00}", currentVolume));
 
                     if (currentVolume > 0.1) {
                         gotchaCount++;
                         Console.WriteLine("Gotcha! " + gotchaCount.ToString());
                         doMancing();
+                        lastMancing = DateTime.Now;
                         many--;
+                    }
+                    DateTime sekarang = DateTime.Now;
+                    if ((sekarang - lastMancing).TotalSeconds > 15) {
+                        Console.WriteLine("So quiet?");
+                        doMancing();
+                        lastMancing = sekarang;
                     }
                     Thread.Sleep(100);
                 }
