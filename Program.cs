@@ -24,15 +24,18 @@ namespace MinecraftAFKFish {
         static int gotchaCount = 0;
 
         static void doMancing() {
-            mouse(MouseEventFlags.RightDown);
-            Thread.Sleep(100);
-            mouse(MouseEventFlags.RightUp);
-            Thread.Sleep(200);
-            mouse(MouseEventFlags.RightDown);
-            Thread.Sleep(100);
-            mouse(MouseEventFlags.RightUp);
+            doRightClick();
+            Thread.Sleep(300);
+            doRightClick();
             Thread.Sleep(2000);
         }
+
+        static void doRightClick() {
+            mouse(MouseEventFlags.RightDown);
+            Thread.Sleep(100);
+            mouse(MouseEventFlags.RightUp);
+        }
+
 
         static void Main(string[] args) {
             MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
@@ -78,7 +81,7 @@ namespace MinecraftAFKFish {
                     DateTime sekarang = DateTime.Now;
                     if ((sekarang - lastMancing).TotalSeconds > 15) {
                         Console.WriteLine("So quiet?");
-                        doMancing();
+                        doRightClick();
                         lastMancing = sekarang;
                     }
                     Thread.Sleep(100);
