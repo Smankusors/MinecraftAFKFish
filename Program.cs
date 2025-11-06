@@ -79,9 +79,10 @@ namespace MinecraftAFKFish {
                         many--;
                     }
                     DateTime sekarang = DateTime.Now;
-                    if ((sekarang - lastMancing).TotalSeconds > 15) {
+                    if ((sekarang - lastMancing).TotalSeconds > 30) {
                         Console.WriteLine("So quiet?");
-                        doRightClick();
+                        doMancing();
+                        Thread.Sleep(200);
                         lastMancing = sekarang;
                     }
                     Thread.Sleep(100);
